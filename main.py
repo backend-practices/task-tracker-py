@@ -10,6 +10,4 @@ match action:
     case 'mark-todo': updateStatus(ids=sys.argv[2:], status='todo')
     case 'mark-done': updateStatus(ids=sys.argv[2:], status='done')
     case 'delete': deleteAction(ids=sys.argv[2:])
-    case 'list': 
-        if len(sys.argv) > 2: listByStatus(status=sys.argv[2])
-        else: listAction()
+    case 'list': len(sys.argv) > 2 if listByStatus(status=sys.argv[2]) else listAction()
