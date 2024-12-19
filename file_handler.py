@@ -1,29 +1,30 @@
-import os
+import json
 
 # READ FILE
 
-def readFile(filename: str)-> str:
-    try:
-        f = open(filename)
-        content: str = f.read()
-        f.close()
-        return content
-    except:
-        print('Error occurs while reading the file.')
+def readFile(filename: str):
+    try: 
+        with open(filename) as f: return json.load(f)
+    except FileNotFoundError: 
         print('File does not exist.')
-        return ''
+        return []
+    except json.JSONDecodeError:
+        print('Error occurs while reading the file.')
+        return []
 
 
 # APPEND FILE
 
 # WRITE FILE
 
-def writeFile(filename: str, data: str):
+def saveFile(filename: str, data: str):
     ## create the file if it does not exist
     try:
+        content = json.dumps(data)
         f = open(filename, 'w')
-        f.write(data)
+        f.write(content)
         f.close()
+        print('Task updated.')
     except:
         print('Error occurs while writting the file.')
 
